@@ -1,4 +1,48 @@
+let canDraw = false;
+let mouseX = 0;
+let mouseY = 0;
+let currentColor = 'black';
+let screen = document.querySelector('#display');
+
+
+function draw(x, y) { 
+  let ctx = screen.getContext('2d'); 
+  let pointX = x - screen.offsetLeft;
+  let pointY = y - screen.offsetTop;
+  ctx.beginPath();
+  ctx.lineWidth = 5;
+  ctx.lineJoin = 'round';
+  ctx.moveTo(mouseX, mouseY);
+  ctx.lineTo(pointX, pointY);
+  ctx.closePath();
+  ctx.strokeStyle = currentColor;
+  ctx.stroke();
+
+  mouseX = pointX;
+  mouseY = pointY;
+}
+
+function mouseMoveEvent(e) {
+  if (canDraw) {
+    draw(e.pageX, e.pageY);
+  }
+}
+
+function mouseDownEvent(e) {
+  canDraw = true;
+  mouseX = e.pageX - screen.offsetLeft;
+  mouseY = e.pageY - screen.offsetTop;
+}
+
+function mouseUpEvent() {
+  canDraw = false;
+}
+
 function colorClickEvent(e) {
+  let color = e.target.getAttribute('background');
+
+  currentColor = color.value;
+
   document.querySelector('.color.active').classList.remove('active');
   e.target.classList.add('active');
 };
@@ -10,8 +54,8 @@ function colorAleatory() {
   return 'rgb(' + r + ',' + g + ',' + b + ')'
 }
 
-
 function changeColor() {
+  document.getElementById('color1').style.backgroundColor = 'black';
   document.getElementById('color2').style.backgroundColor = colorAleatory();
   document.getElementById('color3').style.backgroundColor = colorAleatory();
   document.getElementById('color4').style.backgroundColor = colorAleatory();
@@ -19,10 +63,10 @@ function changeColor() {
   document.getElementById('color6').style.backgroundColor = colorAleatory();
   document.getElementById('color7').style.backgroundColor = colorAleatory();
   document.getElementById('color8').style.backgroundColor = colorAleatory();
-  document.getElementById('color9').style.backgroundColor = colorAleatory()
-  document.getElementById('color10').style.backgroundColor = colorAleatory()
-  document.getElementById('color11').style.backgroundColor = colorAleatory()
-  document.getElementById('color12').style.backgroundColor = colorAleatory()
+  document.getElementById('color9').style.backgroundColor = colorAleatory();
+  document.getElementById('color10').style.backgroundColor = colorAleatory();
+  document.getElementById('color11').style.backgroundColor = colorAleatory();
+  document.getElementById('color12').style.backgroundColor = colorAleatory();
 }
 
 function createFooter() {
@@ -85,4 +129,7 @@ window.onload = () => {
   document.querySelectorAll('#colorArea .color').forEach(item => {
     item.addEventListener('click', colorClickEvent);
   });
+  screen.addEventListener('mouseup', mouseUpEvent);
+  screen.addEventListener('mousedown', mouseDownEvent);
+  screen.addEventListener('mousemove', mouseMoveEvent);
 }
