@@ -1,3 +1,25 @@
+function colorAleatory() {
+  let r = Math.floor(Math.random() * 255),
+    g = Math.floor(Math.random() * 255),
+    b = Math.floor(Math.random() * 255);
+    return 'rgb('+r+','+g+','+b+')'
+}
+
+
+function changeColor(){
+  document.getElementById('color2').style.backgroundColor = colorAleatory();
+  document.getElementById('color3').style.backgroundColor = colorAleatory();
+  document.getElementById('color4').style.backgroundColor = colorAleatory();
+  document.getElementById('color5').style.backgroundColor = colorAleatory();
+  document.getElementById('color6').style.backgroundColor = colorAleatory();
+  document.getElementById('color7').style.backgroundColor = colorAleatory();
+  document.getElementById('color8').style.backgroundColor = colorAleatory();
+  document.getElementById('color9').style.backgroundColor = colorAleatory()
+  document.getElementById('color10').style.backgroundColor = colorAleatory()
+  document.getElementById('color11').style.backgroundColor = colorAleatory()
+  document.getElementById('color12').style.backgroundColor = colorAleatory()
+}
+
 function createFooter() {
   const createFooter = document.createElement('footer');
   document.body.appendChild(createFooter);
@@ -17,8 +39,8 @@ function createButtons() {
     document.querySelector('#divColor').appendChild(button);
     button.setAttribute('class', 'clear');
   }
-  document.getElementsByClassName('clear')[0].innerText = 'the Erase Drawing';
-  document.getElementsByClassName('clear')[1].innerText = 'hange the colours';
+  document.getElementsByClassName('clear')[0].innerText = 'The erase drawing';
+  document.getElementsByClassName('clear')[1].innerText = 'Change the colours';
 }
 
 function createDivs() {
@@ -32,7 +54,8 @@ function createDivs() {
     createDiv.setAttribute('class', 'color');
   }
   document.querySelector('#color1').classList.add('active');
-  createButtons()
+  createButtons();
+  changeColor();
 }
 
 function createMain() {
@@ -54,4 +77,7 @@ window.onload = () => {
   createHeader();
   createMain();
   createFooter();
+  document.querySelectorAll('#colorArea .color').forEach(item => {
+    item.addEventListener('click', colorClickEvent);  
+  });
 }
