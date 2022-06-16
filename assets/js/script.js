@@ -1,12 +1,17 @@
+function colorClickEvent(e) {
+  document.querySelector('.color.active').classList.remove('active');
+  e.target.classList.add('active');
+};
+
 function colorAleatory() {
   let r = Math.floor(Math.random() * 255),
     g = Math.floor(Math.random() * 255),
     b = Math.floor(Math.random() * 255);
-    return 'rgb('+r+','+g+','+b+')'
+  return 'rgb(' + r + ',' + g + ',' + b + ')'
 }
 
 
-function changeColor(){
+function changeColor() {
   document.getElementById('color2').style.backgroundColor = colorAleatory();
   document.getElementById('color3').style.backgroundColor = colorAleatory();
   document.getElementById('color4').style.backgroundColor = colorAleatory();
@@ -78,6 +83,6 @@ window.onload = () => {
   createMain();
   createFooter();
   document.querySelectorAll('#colorArea .color').forEach(item => {
-    item.addEventListener('click', colorClickEvent);  
+    item.addEventListener('click', colorClickEvent);
   });
 }
