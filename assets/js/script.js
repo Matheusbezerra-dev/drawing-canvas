@@ -1,4 +1,9 @@
-
+function createMain() {
+  document.body.appendChild(document.createElement('main'));
+  const createCanvas = document.createElement('canvas');
+  document.querySelector('main').appendChild(createCanvas);
+  createCanvas.setAttribute('id', 'display');
+}
 
 function createHeader() {
   document.body.appendChild(document.createElement('header'));
@@ -9,4 +14,5 @@ function createHeader() {
 
 window.onload = () => {
   createHeader()
+  createMain()
 }
